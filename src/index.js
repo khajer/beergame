@@ -193,7 +193,7 @@ class MyGame extends Phaser.Scene
             console.log(this.beer.anims)
             console.log("beer");
             this.beer.play('beerplay');
-            this.bar.addProgress();
+            
         })
         .on('pointerup', ()=>{
             if(!isOverFlow){
@@ -206,6 +206,7 @@ class MyGame extends Phaser.Scene
                 if(lvl >= 0.75){
                     console.log('perfect');
                     this.beer.play("beer100");
+                    this.bar.addProgress();
                     
                 }else if(lvl >= 0.50){
                     console.log('75');
