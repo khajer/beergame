@@ -40,6 +40,12 @@ import beerOver_2 from './assets/images/over/2.png';
 import beerOver_3 from './assets/images/over/3.png';
 import beerOver_4 from './assets/images/over/4.png';
 
+import pg_background from './assets/images/pg/background.png';
+import pg_mask from './assets/images/pg/mask.png';
+import pg_progress from './assets/images/pg/progress.png';
+
+import {ProgressBar} from './progressbar.js';
+
 class MyGame extends Phaser.Scene
 {    
     constructor ()
@@ -89,11 +95,15 @@ class MyGame extends Phaser.Scene
         this.load.image('beerOver_2', beerOver_2);
         this.load.image('beerOver_3', beerOver_3);
         this.load.image('beerOver_4', beerOver_4);
+
+
+        this.load.image('pg_background', pg_background);
+        this.load.image('pg_mask', pg_mask);
+        this.load.image('pg_progress', pg_progress);
     }
       
     create ()
-    {
-        
+    {        
         this.anims.create({
             key: 'beerplay',
             frames: [
@@ -217,7 +227,41 @@ class MyGame extends Phaser.Scene
 
         }, this);
 
+        this.createProgress();
         
+    }
+    createProgress(){
+        const bar = new ProgressBar(this, game);
+        // const pgBackground = this.make.image({
+        //     x: game.config.width / 2,
+        //     y: 100,
+        //     key: 'pg_background',
+        //     add: true
+        // });
+        // const mask = this.make.image({
+        //     x: game.config.width / 2,
+        //     y: 100,
+        //     key: 'pg_mask',
+        //     add: false
+        // });
+        // var newX = game.config.width / 2;
+        // // newX -= 100;
+        // const pgProgress = this.make.image({
+        //     x: newX,
+        //     y: 100,
+        //     key: 'pg_progress',
+        //     add: true
+        // });
+        // pgProgress.mask = new Phaser.Display.Masks.BitmapMask(this, mask);
+        // this.tweens.add({
+        //     targets: mask,
+        //     // alpha: 0,
+        //     x: -200,
+        //     duration: 10*1000,
+        //     ease: 'Sine.easeInOut',
+        //     loop: -1,
+        //     // yoyo: true
+        // });
     }
     
 }
