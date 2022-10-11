@@ -22,15 +22,15 @@ export class ProgressBar {
             add: true
         });
         this.pgProgress.mask = new Phaser.Display.Masks.BitmapMask(scene, this.mask);
-        scene.tweens.add({
-            targets: this.mask,
-            // alpha: 0,
-            x: -200,
-            duration: 10*1000,
-            ease: 'Sine.easeInOut',
-            loop: -1,
-            // yoyo: true
-        });
+        
+    }
+    update(){
+        
+        this.pgProgress.x -= 1;
+    }
+
+    addProgress(){
+        this.pgProgress.x += 50;
     }
         
 }

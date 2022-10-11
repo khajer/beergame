@@ -102,8 +102,7 @@ class MyGame extends Phaser.Scene
         this.load.image('pg_progress', pg_progress);
     }
       
-    create ()
-    {        
+    create (){        
         this.anims.create({
             key: 'beerplay',
             frames: [
@@ -194,6 +193,7 @@ class MyGame extends Phaser.Scene
             console.log(this.beer.anims)
             console.log("beer");
             this.beer.play('beerplay');
+            this.bar.addProgress();
         })
         .on('pointerup', ()=>{
             if(!isOverFlow){
@@ -202,9 +202,11 @@ class MyGame extends Phaser.Scene
                 this.beer.stop();
                 console.log(lvl);
                 this.beer.anims.timeScale = 1;
+                                
                 if(lvl >= 0.75){
                     console.log('perfect');
                     this.beer.play("beer100");
+                    
                 }else if(lvl >= 0.50){
                     console.log('75');
                     this.beer.play("beer75");
@@ -231,37 +233,12 @@ class MyGame extends Phaser.Scene
         
     }
     createProgress(){
-        const bar = new ProgressBar(this, game);
-        // const pgBackground = this.make.image({
-        //     x: game.config.width / 2,
-        //     y: 100,
-        //     key: 'pg_background',
-        //     add: true
-        // });
-        // const mask = this.make.image({
-        //     x: game.config.width / 2,
-        //     y: 100,
-        //     key: 'pg_mask',
-        //     add: false
-        // });
-        // var newX = game.config.width / 2;
-        // // newX -= 100;
-        // const pgProgress = this.make.image({
-        //     x: newX,
-        //     y: 100,
-        //     key: 'pg_progress',
-        //     add: true
-        // });
-        // pgProgress.mask = new Phaser.Display.Masks.BitmapMask(this, mask);
-        // this.tweens.add({
-        //     targets: mask,
-        //     // alpha: 0,
-        //     x: -200,
-        //     duration: 10*1000,
-        //     ease: 'Sine.easeInOut',
-        //     loop: -1,
-        //     // yoyo: true
-        // });
+        this.bar = new ProgressBar(this, game);        
+    }
+
+    update(){
+        // console.log("update");
+        this.bar.update();
     }
     
 }
