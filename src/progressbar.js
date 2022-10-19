@@ -22,11 +22,21 @@ export class ProgressBar {
             add: true
         });
         this.pgProgress.mask = new Phaser.Display.Masks.BitmapMask(scene, this.mask);
+        // scene.tweens.add({
+        //     targets: this.mask,
+        //     alpha: 0.2,
+        //     // x: -200,
+        //     duration: 400,
+        //     // ease: 'Sine.easeInOut',
+        //     ease: 'Linear',
+        //     loop: -1,
+        //     yoyo: true
+        // });
         
     }
     update(){
         
-        this.pgProgress.x -= 1;
+        this.pgProgress.x -= 0.5;
     }
 
     addProgress(){
