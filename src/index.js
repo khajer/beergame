@@ -15,7 +15,7 @@ class MyGame extends Phaser.Scene
         this.drinker = new Drinker(this);
 
         this.beer = new Beer(this);
-        
+        this.timeDelayPourCompleted = 200;
         this.objGames = [
             this.bar, 
             this.drinker,
@@ -44,8 +44,15 @@ class MyGame extends Phaser.Scene
         let beer = this.beer;
         this.drinker.addEvent(Drinker.CHARACTER_WAITING , ()=>{
             console.log("waiting !!!");
-            beer.availablePour = true;
+            this.beer.availablePour = true;
         });
+        this.drinker.addEvent(Drinker.CHARACTER_RESPONSED , ()=>{
+            console.log("response completed !!!");
+            this.beer.availablePour = true;
+            this.beer.beer.play('beerplay').stop();
+            this.beer.show();
+        });
+        
 
         this.beer.addEvent(Beer.BEER_COMPLETED_100, ()=>{
             console.log("completed 100");
@@ -53,7 +60,7 @@ class MyGame extends Phaser.Scene
             setTimeout(()=>{
                 this.beer.hide();
                 this.drinker.drinkBeer(100);
-            }, 1000);
+            }, this.timeDelayPourCompleted);
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_75, ()=>{
             console.log("completed 75");
@@ -61,7 +68,7 @@ class MyGame extends Phaser.Scene
             setTimeout(()=>{
                 this.beer.hide();
                 this.drinker.drinkBeer(75);
-            }, 1000);
+            }, this.timeDelayPourCompleted);
             
 
         });
@@ -71,7 +78,7 @@ class MyGame extends Phaser.Scene
             setTimeout(()=>{
                 this.beer.hide();
                 this.drinker.drinkBeer(50);
-            }, 1000);
+            }, this.timeDelayPourCompleted);
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_25, ()=>{
             console.log("completed 25");
@@ -79,7 +86,7 @@ class MyGame extends Phaser.Scene
             setTimeout(()=>{
                 this.beer.hide();
                 this.drinker.drinkBeer(25);
-            }, 1000);
+            }, this.timeDelayPourCompleted);
         });      
         
     }

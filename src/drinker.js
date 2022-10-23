@@ -71,7 +71,7 @@ export class Drinker{
                 { key: 'ch_resp_100_1' },
                 { key: 'ch_resp_100_2' },
             ],
-            frameRate: 4,
+            frameRate: 8,
             repeat: 1
         });
         this.scene.anims.create({
@@ -80,7 +80,7 @@ export class Drinker{
                 { key: 'ch_resp_75_1' },
                 { key: 'ch_resp_75_2' },
             ],
-            frameRate: 4,
+            frameRate: 8,
             repeat: 1
         });
         this.scene.anims.create({
@@ -89,7 +89,7 @@ export class Drinker{
                 { key: 'ch_resp_50_1' },
                 { key: 'ch_resp_50_2' },
             ],
-            frameRate: 4,
+            frameRate: 8,
             repeat: 1
         });
         this.scene.anims.create({
@@ -98,7 +98,7 @@ export class Drinker{
                 { key: 'ch_resp_25_1' },
                 { key: 'ch_resp_25_2' },
             ],
-            frameRate: 4,
+            frameRate: 8,
             repeat: 1
         });
         
@@ -110,7 +110,7 @@ export class Drinker{
                 { key: 'ch_in_3' },
                 { key: 'ch_in_4' },
             ],
-            frameRate: 4,
+            frameRate: 8,
             repeat:0
         });
 
@@ -122,7 +122,7 @@ export class Drinker{
                 { key: 'ch_waiting_3' },
                 { key: 'ch_waiting_4' },
             ],
-            frameRate: 4,
+            frameRate: 8,
             repeat: -1
         });
         this.scene.anims.create({
@@ -133,7 +133,7 @@ export class Drinker{
                 { key: 'ch_drink_3' },
                 { key: 'ch_drink_4' },
             ],
-            frameRate: 4,
+            frameRate: 8,
             repeat: 0
         });
         this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, 1000, 'waiting')
@@ -158,6 +158,9 @@ export class Drinker{
                 } else if (dk.percentDrink === 25) {
                     dk.drinker.play("resp25"); 
                 }
+            } else if (dk.drinker.anims.currentAnim.key.substring(0, 4) === "resp"){
+                dk.mapEvent.get(CHARACTER_RESPONSED)();
+                dk.drinker.play("waiting"); 
             }
         }, this.scene);
     }
@@ -170,4 +173,6 @@ export class Drinker{
     }
 }
 const CHARACTER_WAITING = "WAITING";
+const CHARACTER_RESPONSED = "RESPONSED";
 Drinker.CHARACTER_WAITING = CHARACTER_WAITING;
+Drinker.CHARACTER_RESPONSED = CHARACTER_RESPONSED;

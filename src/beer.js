@@ -162,7 +162,7 @@ export class Beer {
             repeat:-1
         });
 
-        var speed = 1;
+        var speed = 2;
         var isOverFlow = false;
 
         this.beer = this.scene.add.sprite(this.scene.game.config.width / 2, 1000, 'beer')
