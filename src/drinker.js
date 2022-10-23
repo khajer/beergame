@@ -72,7 +72,7 @@ export class Drinker{
                 { key: 'ch_resp_100_2' },
             ],
             frameRate: 8,
-            repeat: 1
+            repeat: 0
         });
         this.scene.anims.create({
             key: 'resp75',
@@ -81,7 +81,7 @@ export class Drinker{
                 { key: 'ch_resp_75_2' },
             ],
             frameRate: 8,
-            repeat: 1
+            repeat: 0
         });
         this.scene.anims.create({
             key: 'resp50',
@@ -90,7 +90,7 @@ export class Drinker{
                 { key: 'ch_resp_50_2' },
             ],
             frameRate: 8,
-            repeat: 1
+            repeat: 0
         });
         this.scene.anims.create({
             key: 'resp25',
@@ -99,7 +99,7 @@ export class Drinker{
                 { key: 'ch_resp_25_2' },
             ],
             frameRate: 8,
-            repeat: 1
+            repeat: 0
         });
         
         this.scene.anims.create({
