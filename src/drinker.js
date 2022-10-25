@@ -8,6 +8,12 @@ import ch_in_2 from './assets/images/characters/1/in/2.png';
 import ch_in_3 from './assets/images/characters/1/in/3.png';
 import ch_in_4 from './assets/images/characters/1/in/4.png';
 
+
+import ch_out_1 from './assets/images/characters/1/out/1.png';
+import ch_out_2 from './assets/images/characters/1/out/2.png';
+import ch_out_3 from './assets/images/characters/1/out/3.png';
+import ch_out_4 from './assets/images/characters/1/out/4.png';
+
 import ch_drink_1 from './assets/images/characters/1/receive/1.png';
 import ch_drink_2 from './assets/images/characters/1/receive/2.png';
 import ch_drink_3 from './assets/images/characters/1/receive/3.png';
@@ -48,6 +54,12 @@ export class Drinker{
         this.scene.load.image('ch_in_2', ch_in_2);
         this.scene.load.image('ch_in_3', ch_in_3);
         this.scene.load.image('ch_in_4', ch_in_4);
+
+        this.scene.load.image('ch_out_1', ch_out_1);
+        this.scene.load.image('ch_out_2', ch_out_2);
+        this.scene.load.image('ch_out_3', ch_out_3);
+        this.scene.load.image('ch_out_4', ch_out_4);
+
         this.scene.load.image('ch_drink_1', ch_drink_1);
         this.scene.load.image('ch_drink_2', ch_drink_2);
         this.scene.load.image('ch_drink_3', ch_drink_3);
@@ -65,27 +77,30 @@ export class Drinker{
     }
     setupMapCharacterEvent(){
         let aniSet1 = new Map();
-        aniSet1.set("in", "in");
-        aniSet1.set("resp100", "resp100");
-        aniSet1.set("resp75", "resp75");
-        aniSet1.set("resp50", "resp50");
-        aniSet1.set("resp25", "resp25");
-        aniSet1.set("waiting", "waiting");
-        aniSet1.set("out", "out");
-        aniSet1.set("drink", "drink");
+        aniSet1.set("in", "1-in");
+        aniSet1.set("resp100", "1-resp100");
+        aniSet1.set("resp75", "1-resp75");
+        aniSet1.set("resp50", "1-resp50");
+        aniSet1.set("resp25", "1-resp25");
+        aniSet1.set("waiting", "1-waiting");
+        aniSet1.set("out", "1-out");
+        aniSet1.set("drink", "1-drink");
         this.mapAnimation[0] = aniSet1;
     }
     getDrinkerType(stateName){        
+        console.log(this.mapAnimation[this.drinkerType].get(stateName)); 
         return this.mapAnimation[this.drinkerType].get(stateName);        
     }
 
-    setDrinkerComeIn(drinkerType){
+    setDrinkerComeIn(drinkerType, totalDrink){
         this.drinkerType = drinkerType;
         this.drinker.play(this.getDrinkerType("in"));
+        this.cntDrink = 0;
+        this.totalDrink = totalDrink;
     }
     create(){        
         this.scene.anims.create({
-            key: 'resp100',
+            key: '1-resp100',
             frames: [
                 { key: 'ch_resp_100_1' },
                 { key: 'ch_resp_100_2' },
@@ -94,7 +109,7 @@ export class Drinker{
             repeat: 0
         });
         this.scene.anims.create({
-            key: 'resp75',
+            key: '1-resp75',
             frames: [
                 { key: 'ch_resp_75_1' },
                 { key: 'ch_resp_75_2' },
@@ -103,7 +118,7 @@ export class Drinker{
             repeat: 0
         });
         this.scene.anims.create({
-            key: 'resp50',
+            key: '1-resp50',
             frames: [
                 { key: 'ch_resp_50_1' },
                 { key: 'ch_resp_50_2' },
@@ -112,7 +127,7 @@ export class Drinker{
             repeat: 0
         });
         this.scene.anims.create({
-            key: 'resp25',
+            key: '1-resp25',
             frames: [
                 { key: 'ch_resp_25_1' },
                 { key: 'ch_resp_25_2' },
@@ -122,7 +137,7 @@ export class Drinker{
         });
         
         this.scene.anims.create({
-            key: 'in',
+            key: '1-in',
             frames: [
                 { key: 'ch_in_1' },
                 { key: 'ch_in_2' },
@@ -132,9 +147,20 @@ export class Drinker{
             frameRate: 8,
             repeat:0
         });
+        this.scene.anims.create({
+            key: '1-out',
+            frames: [
+                { key: 'ch_out_1' },
+                { key: 'ch_out_2' },
+                { key: 'ch_out_3' },
+                { key: 'ch_out_4' },
+            ],
+            frameRate: 8,
+            repeat:0
+        });
 
         this.scene.anims.create({
-            key: 'waiting',
+            key: '1-waiting',
             frames: [
                 { key: 'ch_waiting_1' },
                 { key: 'ch_waiting_2' },
@@ -145,7 +171,7 @@ export class Drinker{
             repeat: -1
         });
         this.scene.anims.create({
-            key: 'out',
+            key: '1-out',
             frames: [
                 { key: 'ch_waiting_1' },
                 { key: 'ch_waiting_2' },
@@ -156,7 +182,7 @@ export class Drinker{
             repeat: -1
         });
         this.scene.anims.create({
-            key: 'drink',
+            key: '1-drink',
             frames: [
                 { key: 'ch_drink_1' },
                 { key: 'ch_drink_2' },
@@ -170,6 +196,7 @@ export class Drinker{
 
         let dk = this;
         this.drinker.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {            
+            console.log("animation completed ", dk.drinker.anims.currentAnim.key);
             if (dk.drinker.anims.currentAnim.key === dk.getDrinkerType("in")){
                 dk.drinker.play(dk.getDrinkerType("waiting")); 
                 if (dk.mapEvent.get(CHARACTER_WAITING) !== undefined) {
@@ -186,19 +213,22 @@ export class Drinker{
                 } else if (dk.percentDrink === 25) {
                     dk.drinker.play( dk.getDrinkerType("resp25")); 
                 }
-            } else if (dk.drinker.anims.currentAnim.key.substring(0, 4) === "resp"){
-                // console.log("response", dk.cntDrink)
+            } else if (dk.drinker.anims.currentAnim.key.substring(2, 6) === "resp"){
+                
                 dk.cntDrink += 1;
                 if (dk.cntDrink < dk.totalDrink) {
                     dk.mapEvent.get(CHARACTER_RESPONSED)();
                     dk.drinker.play( dk.getDrinkerType("waiting")); 
-                } else {
-                    // console.log("out", dk.cntDrink);
-                    dk.mapEvent.get(CHARACTER_OUT)();
+                } else {                    
+                    // dk.mapEvent.get(CHARACTER_OUT)();                    
+                    console.log("xxxx")
                     dk.drinker.play(dk.getDrinkerType("out")); 
-                }
+                }                
+            } else if (dk.drinker.anims.currentAnim.key == dk.getDrinkerType("out")){
+                dk.mapEvent.get(CHARACTER_OUT)();         
+            }            
                 
-            }
+            
         }, this.scene);
     }
     addEvent(eventName, callback){
@@ -206,7 +236,7 @@ export class Drinker{
     }
     drinkBeer(percentDrink){
         this.percentDrink = percentDrink;
-        this.drinker.play("drink");
+        this.drinker.play(this.getDrinkerType("drink"));
     }
 }
 const CHARACTER_WAITING = "WAITING";

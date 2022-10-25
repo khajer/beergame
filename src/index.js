@@ -36,10 +36,11 @@ class MyGame extends Phaser.Scene
       
     setPlayerComeIn(){
         let drinkerType = 0;
-        this.drinker.setDrinkerComeIn(drinkerType);   
+        let setDrinkerComeIn = 2;
+        this.drinker.setDrinkerComeIn(drinkerType, setDrinkerComeIn);   
         this.beer.availablePour = true;
         this.beer.beer.play('beerplay').stop();
-        this.beer.show();
+        this.beer.hide();
     }
     create (){       
         this.background = this.add.sprite(this.game.config.width / 2, 500, 'background');
@@ -53,6 +54,8 @@ class MyGame extends Phaser.Scene
         this.drinker.addEvent(Drinker.CHARACTER_WAITING , ()=>{
             console.log("waiting !!!");
             this.beer.availablePour = true;
+            this.beer.beer.play('beerplay').stop();
+            this.beer.show();
         });
         this.drinker.addEvent(Drinker.CHARACTER_RESPONSED , ()=>{
             console.log("response completed !!!");
@@ -98,8 +101,7 @@ class MyGame extends Phaser.Scene
                 this.beer.hide();
                 this.drinker.drinkBeer(25);
             }, this.timeDelayPourCompleted);
-        });      
-        
+        });              
     }
 
 
