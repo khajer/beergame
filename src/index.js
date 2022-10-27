@@ -35,9 +35,12 @@ class MyGame extends Phaser.Scene
     }
       
     setPlayerComeIn(){
-        let drinkerType = 0;
-        let setDrinkerComeIn = 2;
-        this.drinker.setDrinkerComeIn(drinkerType, setDrinkerComeIn);   
+        const maxType = 2;
+        const maxDrink = 4;
+        let drinkerType = Math.floor(Math.random() * maxType);
+        let totalDrink = Math.floor(Math.random() * maxDrink);
+        console.log(drinkerType, totalDrink);
+        this.drinker.setDrinkerComeIn(drinkerType, totalDrink);   
         this.beer.availablePour = true;
         this.beer.beer.play('beerplay').stop();
         this.beer.hide();
