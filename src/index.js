@@ -35,7 +35,7 @@ class MyGame extends Phaser.Scene
     }
       
     setPlayerComeIn(){
-        const maxType = 2;
+        const maxType = 3;
         const maxDrink = 4;
         let drinkerType = Math.floor(Math.random() * maxType);
         let totalDrink = Math.floor(Math.random() * maxDrink);

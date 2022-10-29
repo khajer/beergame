@@ -46,6 +46,29 @@ import ch1_resp_50_2 from './assets/images/characters/1/response/50/2.png';
 import ch1_resp_25_1 from './assets/images/characters/1/response/25/1.png';
 import ch1_resp_25_2 from './assets/images/characters/1/response/25/2.png';
 
+import ch2_waiting_1 from './assets/images/characters/2/waiting/1.png';
+import ch2_waiting_2 from './assets/images/characters/2/waiting/2.png';
+import ch2_in_1 from './assets/images/characters/2/in/1.png';
+import ch2_in_2 from './assets/images/characters/2/in/2.png';
+import ch2_in_3 from './assets/images/characters/2/in/3.png';
+import ch2_in_4 from './assets/images/characters/2/in/4.png';
+import ch2_out_1 from './assets/images/characters/2/out/1.png';
+import ch2_out_2 from './assets/images/characters/2/out/2.png';
+import ch2_out_3 from './assets/images/characters/2/out/3.png';
+import ch2_out_4 from './assets/images/characters/2/out/4.png';
+import ch2_drink_1 from './assets/images/characters/2/drink/1.png';
+import ch2_drink_2 from './assets/images/characters/2/drink/2.png';
+import ch2_drink_3 from './assets/images/characters/2/drink/3.png';
+import ch2_drink_4 from './assets/images/characters/2/drink/4.png';
+import ch2_resp_100_1 from './assets/images/characters/2/response/100/1.png';
+import ch2_resp_100_2 from './assets/images/characters/2/response/100/2.png';
+import ch2_resp_75_1 from './assets/images/characters/2/response/75/1.png';
+import ch2_resp_75_2 from './assets/images/characters/2/response/75/2.png';
+import ch2_resp_50_1 from './assets/images/characters/2/response/50/1.png';
+import ch2_resp_50_2 from './assets/images/characters/2/response/50/2.png';
+import ch2_resp_25_1 from './assets/images/characters/2/response/25/1.png';
+import ch2_resp_25_2 from './assets/images/characters/2/response/25/2.png';
+
 const ani = {    
     "0": {
         "resp100": {
@@ -204,6 +227,84 @@ const ani = {
             frameRate: 8,
             repeat: -1
         }
+    },
+    "2": {
+        "resp100": {
+            keyframe: [
+                { key: ["ch2_resp_100_1"] },
+                { key: ["ch2_resp_100_2"] },
+            ],
+            frameRate: 8,
+            repeat: 0
+        },
+        "resp75": {
+            keyframe: [
+                { key: ["ch2_resp_75_1"] },
+                { key: ["ch2_resp_75_2"] },
+            ],
+            frameRate: 8,
+            repeat: 0
+        },
+        "resp50": {
+            keyframe: [
+                { key: ["ch2_resp_50_1"] },
+                { key: ["ch2_resp_50_2"] },
+            ],
+            frameRate: 8,
+            repeat: 0
+        },
+        "resp25": {
+            keyframe: [
+                { key: ["ch2_resp_25_1"] },
+                { key: ["ch2_resp_25_2"] },
+            ],
+            frameRate: 8,
+            repeat: 0
+        },
+        "resp0": {
+            keyframe: [
+                { key: ["ch2_resp_0_1"] },
+                { key: ["ch2_resp_0_2"] },
+            ]
+        },
+        "in": {
+            keyframe: [
+                { key: ["ch2_in_1"] },
+                { key: ["ch2_in_2"] },
+                { key: ["ch2_in_3"] },
+                { key: ["ch2_in_4"] },
+            ],
+            frameRate: 8,
+            repeat: 0
+        },
+        "out": {
+            keyframe: [
+                { key: ["ch2_out_1"] },
+                { key: ["ch2_out_2"] },
+                { key: ["ch2_out_3"] },
+                { key: ["ch2_out_4"] },
+            ],
+            frameRate: 8,
+            repeat: 0
+        },
+        "drink": {
+            keyframe: [
+                { key: ["ch2_drink_1"] },
+                { key: ["ch2_drink_2"] },
+                { key: ["ch2_drink_3"] },
+                { key: ["ch2_drink_4"] },
+            ],
+            frameRate: 8,
+            repeat: 0
+        },
+        "waiting": {
+            keyframe: [
+                { key: ["ch2_waiting_1"] },
+                { key: ["ch2_waiting_2"] },
+            ],
+            frameRate: 8,
+            repeat: -1
+        }
     }
 }
 export class UserDrink{
@@ -258,6 +359,29 @@ export class UserDrink{
         scene.load.image("ch1_resp_50_2", ch1_resp_50_2);
         scene.load.image("ch1_resp_25_1", ch1_resp_25_1);
         scene.load.image("ch1_resp_25_2", ch1_resp_25_2);
+        
+        scene.load.image("ch2_waiting_1", ch2_waiting_1);
+        scene.load.image("ch2_waiting_2", ch2_waiting_2);
+        scene.load.image("ch2_in_1", ch2_in_1);
+        scene.load.image("ch2_in_2", ch2_in_2);
+        scene.load.image("ch2_in_3", ch2_in_3);
+        scene.load.image("ch2_in_4", ch2_in_4);
+        scene.load.image("ch2_out_1", ch2_out_1);
+        scene.load.image("ch2_out_2", ch2_out_2);
+        scene.load.image("ch2_out_3", ch2_out_3);
+        scene.load.image("ch2_out_4", ch2_out_4);
+        scene.load.image("ch2_drink_1", ch2_drink_1);
+        scene.load.image("ch2_drink_2", ch2_drink_2);
+        scene.load.image("ch2_drink_3", ch2_drink_3);
+        scene.load.image("ch2_drink_4", ch2_drink_4);
+        scene.load.image("ch2_resp_100_1", ch2_resp_100_1);
+        scene.load.image("ch2_resp_100_2", ch2_resp_100_2);
+        scene.load.image("ch2_resp_75_1", ch2_resp_75_1);
+        scene.load.image("ch2_resp_75_2", ch2_resp_75_2);
+        scene.load.image("ch2_resp_50_1", ch2_resp_50_1);
+        scene.load.image("ch2_resp_50_2", ch2_resp_50_2);
+        scene.load.image("ch2_resp_25_1", ch2_resp_25_1);
+        scene.load.image("ch2_resp_25_2", ch2_resp_25_2);
                
     }
     static createAnimation(scene){                        
