@@ -1,4 +1,4 @@
-    import Phaser from 'phaser';
+import Phaser from 'phaser';
 
 import background from './assets/images/backgrounds/1.png';
 
@@ -26,6 +26,7 @@ class MyGame extends Phaser.Scene
     preload ()
     {   
         this.load.image('background', background);     
+        
         this.objGames.forEach(e=>{
             if (e.preload !== undefined){
                 e.preload();
@@ -35,8 +36,9 @@ class MyGame extends Phaser.Scene
     }
       
     setPlayerComeIn(){
-        const maxType = 3;
+        const maxType = 3; 
         const maxDrink = 4;
+
         let drinkerType = Math.floor(Math.random() * maxType);
         let totalDrink = Math.floor(Math.random() * maxDrink);
         console.log(drinkerType, totalDrink);
@@ -73,40 +75,31 @@ class MyGame extends Phaser.Scene
         });
         
         let beer = this.beer;
-        this.beer.addEvent(Beer.BEER_COMPLETED_100, ()=>{
-            console.log("completed 100");
-            beer.availablePour = false;
-            setTimeout(()=>{
-                this.beer.hide();
-                this.drinker.drinkBeer(100);
-            }, this.timeDelayPourCompleted);
+        this.beer.addEvent(Beer.BEER_COMPLETED_100, ()=>{            
+            this.pourBeerCompleted(beer, 100);            
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_75, ()=>{
-            console.log("completed 75");
-            beer.availablePour = false;
-            setTimeout(()=>{
-                this.beer.hide();
-                this.drinker.drinkBeer(75);
-            }, this.timeDelayPourCompleted);
+            this.pourBeerCompleted(beer, 75);            
         });
-        this.beer.addEvent(Beer.BEER_COMPLETED_50, ()=>{
-            console.log("completed 50");
-            beer.availablePour = false;
-            setTimeout(()=>{
-                this.beer.hide();
-                this.drinker.drinkBeer(50);
-            }, this.timeDelayPourCompleted);
+        this.beer.addEvent(Beer.BEER_COMPLETED_50, ()=>{            
+            this.pourBeerCompleted(beer, 50);            
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_25, ()=>{
-            console.log("completed 25");
-            beer.availablePour = false;
-            setTimeout(()=>{
-                this.beer.hide();
-                this.drinker.drinkBeer(25);
-            }, this.timeDelayPourCompleted);
-        });              
+            this.pourBeerCompleted(beer, 25);            
+        });             
+                
     }
 
+    pourBeerCompleted(beer, percentPour){
+        beer.availablePour = false;
+        setTimeout(()=>{
+            this.beer.hide();
+            this.drinker.drinkBeer(percentPour);
+            
+        }, this.timeDelayPourCompleted);
+
+    }
+    
 
     update(){
         this.objGames.forEach(e=>{            

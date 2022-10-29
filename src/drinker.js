@@ -1,5 +1,8 @@
 import {UserDrink} from "./UserDrink.js"
 
+import atariPng from "./assets/fonts/atari-smooth.png";
+import atariXml from './assets/fonts/atari-smooth.xml';
+
 export class Drinker{
     constructor(scene){
         this.scene = scene;
@@ -13,6 +16,7 @@ export class Drinker{
 
     preload(){
         UserDrink.loadImage(this.scene);
+        this.scene.load.bitmapFont('atari', atariPng, atariXml);
     }        
     playState(stateName){        
         return this.drinkerType +"-"+stateName;               
@@ -38,6 +42,8 @@ export class Drinker{
                 }
             } else if (dk.drinker.anims.currentAnim.key ===  dk.playState("drink")){
                 
+                dk.addPoint(dk.percentDrink, dk.scene.game.config.width / 2, 600); 
+
                 if (dk.percentDrink === 100){
                     dk.drinker.play( dk.playState("resp100")); 
                 } else if (dk.percentDrink === 75) {
@@ -66,6 +72,23 @@ export class Drinker{
     drinkBeer(percentDrink){
         this.percentDrink = percentDrink;
         this.drinker.play(this.playState("drink"));
+    }
+    addPoint( point, x, y) {
+
+        let bitmapFont = this.scene.add.bitmapText(x, y, 'atari', '+'+point)
+            .setOrigin(0.5);
+
+        this.scene.tweens.add({
+            targets: [bitmapFont],
+            y: "-=20",
+            alpha: "0.1",
+            duration : 500,
+            ease: 'Power0', 
+            repeat: 0,
+            onComplete:()=>{
+                bitmapFont.destroy();
+            }
+        });
     }
 }
 const CHARACTER_WAITING = "WAITING";
