@@ -76,7 +76,8 @@ class MyGame extends Phaser.Scene
         
         let beer = this.beer;
         this.beer.addEvent(Beer.BEER_COMPLETED_100, ()=>{            
-            this.pourBeerCompleted(beer, 100);            
+            this.pourBeerCompleted(beer, 100);        
+            this.bar.addProgress(10);
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_75, ()=>{
             this.pourBeerCompleted(beer, 75);            
@@ -86,7 +87,15 @@ class MyGame extends Phaser.Scene
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_25, ()=>{
             this.pourBeerCompleted(beer, 25);            
+        });
+        this.beer.addEvent(Beer.BEER_COMPLETED_OVER, ()=>{              
+            this.pourBeerCompleted(beer, -50);            
         });             
+
+        this.bar.addGameoverFunc(()=>{
+            console.log("game over");            
+            this.gameover = true;
+        });
                 
     }
 
@@ -97,7 +106,6 @@ class MyGame extends Phaser.Scene
             this.drinker.drinkBeer(percentPour);
             
         }, this.timeDelayPourCompleted);
-
     }
     
 
@@ -107,8 +115,7 @@ class MyGame extends Phaser.Scene
                 e.update();
             }            
         }); 
-    }
-    
+    }    
 }
 
 const config = {

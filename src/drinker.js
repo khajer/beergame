@@ -30,8 +30,7 @@ export class Drinker{
     }
     create(){
         UserDrink.createAnimation(this.scene);                
-        this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, 1000, this.playState('waiting'));
-
+        this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, 800, this.playState('waiting'));
         let dk = this;
         this.drinker.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {            
             console.log("animation completed ", dk.drinker.anims.currentAnim.key);
@@ -51,6 +50,8 @@ export class Drinker{
                 } else if (dk.percentDrink === 50) {
                     dk.drinker.play( dk.playState("resp50")); 
                 } else if (dk.percentDrink === 25) {
+                    dk.drinker.play( dk.playState("resp25")); 
+                } else if (dk.percentDrink === -50) {
                     dk.drinker.play( dk.playState("resp25")); 
                 }
             } else if (dk.drinker.anims.currentAnim.key.substring(2, 6) === "resp"){                
@@ -74,8 +75,9 @@ export class Drinker{
         this.drinker.play(this.playState("drink"));
     }
     addPoint( point, x, y) {
-
-        let bitmapFont = this.scene.add.bitmapText(x, y, 'atari', '+'+point)
+        // let txtPoint = point;
+        var txtPoint = (point>0)? "+" + point: "" + point;
+        let bitmapFont = this.scene.add.bitmapText(x, y, 'atari', txtPoint)
             .setOrigin(0.5);
 
         this.scene.tweens.add({

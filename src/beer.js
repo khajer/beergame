@@ -101,7 +101,7 @@ export class Beer {
                 { key: 'beer10' },
                 { key: 'beer11' },
                 { key: 'beer12' },
-                { key: 'beer13', duration: 50 }
+                { key: 'beer13' }
             ],
             frameRate: 8,
             repeat:0
@@ -214,12 +214,13 @@ export class Beer {
             }
             
         });
-
+        let beer = this.beer;
+        let t = this;
         this.beer.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
-            // console.log("completed beer")
-            // isOverFlow = true;
-            // this.beer.anims.timeScale = 1;
-            // this.beer.play("beerOver"); 
+            isOverFlow = true;
+            beer.anims.timeScale = 1;
+            beer.play("beerOver"); 
+            t.mapEvent.get(BEER_COMPLETED_OVER)();
 
         }, this.scene);
     }
