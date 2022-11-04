@@ -10,11 +10,11 @@ export class ScorePoint {
     }
 
     preload(){
-        this.scene.load.bitmapFont('atari', atariPng, atariXml);
+        this.scene.load.bitmapFont('atari-1', atariPng, atariXml);
     }
 
     create(){        
-        this.scorePoint = this.scene.add.bitmapText(100, 100, 'atari', this.point)
+        this.scorePoint = this.scene.add.bitmapText(100, 100, 'atari-1', this.point)
             .setOrigin(0.5);
     }
     

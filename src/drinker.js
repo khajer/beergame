@@ -42,7 +42,7 @@ export class Drinker{
                 }
             } else if (dk.drinker.anims.currentAnim.key ===  dk.playState("drink")){
                 
-                dk.addPoint(dk.percentDrink, dk.scene.game.config.width / 2, 600); 
+                dk.addPoint(dk.percentDrink, dk.scene.game.config.width / 2, 800); 
 
                 if (dk.percentDrink === 100){
                     dk.drinker.play( dk.playState("resp100")); 
@@ -80,7 +80,8 @@ export class Drinker{
     addPoint( point, x, y) {
         var txtPoint = (point>0)? "+" + point: "" + point;
         let bitmapFont = this.scene.add.bitmapText(x, y, 'atari', txtPoint)
-            .setOrigin(0.5);
+            .setOrigin(0.5)
+            .setFontSize(40);
 
         this.scene.tweens.add({
             targets: [bitmapFont],
