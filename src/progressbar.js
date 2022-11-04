@@ -43,13 +43,11 @@ export class ProgressBar {
     }
     update(){
         if( this.gameover === true){
-            console.log("game over");
             return;
         }
         if(this.pgProgress.x + (this.pgBackground.width/2) > this.pgBackground.width/2){
             this.pgProgress.x -= this.reduceSpeed;
-        }else{
-            
+        }else{            
             this.gameover = true;
             this.cb();
             

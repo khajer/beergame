@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import background from './assets/images/backgrounds/1.png';
 
 import {ProgressBar} from './progressbar.js';
+import {ScorePoint} from './scorepoint.js'
 import {Beer} from './beer.js'
 import {Drinker} from './drinker.js'
 
@@ -13,13 +14,15 @@ class MyGame extends Phaser.Scene
         super();        
         this.bar = new ProgressBar(this);        
         this.drinker = new Drinker(this);
+        this.scorePoint = new ScorePoint(this);
 
         this.beer = new Beer(this);
         this.timeDelayPourCompleted = 200;
         this.objGames = [
             this.bar, 
             this.drinker,
-            this.beer            
+            this.beer,
+            this.scorePoint            
         ];
     }
 
@@ -31,8 +34,7 @@ class MyGame extends Phaser.Scene
             if (e.preload !== undefined){
                 e.preload();
             }            
-        });
-    
+        });    
     }
       
     setPlayerComeIn(){
@@ -56,40 +58,43 @@ class MyGame extends Phaser.Scene
         });  
                 
         this.setPlayerComeIn();
+        this.drinker.setPointObject(this.bar, this.scorePoint);
         this.drinker.addEvent(Drinker.CHARACTER_WAITING , ()=>{
-            console.log("waiting !!!");
             this.beer.availablePour = true;
             this.beer.beer.play('beerplay').stop();
             this.beer.show();
         });
         this.drinker.addEvent(Drinker.CHARACTER_RESPONSED , ()=>{
-            console.log("response completed !!!");
             this.beer.availablePour = true;
             this.beer.beer.play('beerplay').stop();
             this.beer.show();
         });
 
         this.drinker.addEvent(Drinker.CHARACTER_OUT , ()=>{
-            console.log("go out !!!"); 
             this.setPlayerComeIn();         
         });
-        
+
         let beer = this.beer;
         this.beer.addEvent(Beer.BEER_COMPLETED_100, ()=>{            
             this.pourBeerCompleted(beer, 100);        
-            this.bar.addProgress(10);
+            // this.bar.addProgress(10);
+            // this.scorePoint.addPoint(100);
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_75, ()=>{
             this.pourBeerCompleted(beer, 75);            
+            // this.scorePoint.addPoint(75);
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_50, ()=>{            
             this.pourBeerCompleted(beer, 50);            
+            // this.scorePoint.addPoint(50);
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_25, ()=>{
             this.pourBeerCompleted(beer, 25);            
+            // this.scorePoint.addPoint(25);
         });
         this.beer.addEvent(Beer.BEER_COMPLETED_OVER, ()=>{              
             this.pourBeerCompleted(beer, -50);            
+            // this.scorePoint.addPoint(-50);
         });             
 
         this.bar.addGameoverFunc(()=>{

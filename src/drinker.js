@@ -32,6 +32,7 @@ export class Drinker{
         UserDrink.createAnimation(this.scene);                
         this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, 800, this.playState('waiting'));
         let dk = this;
+
         this.drinker.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {            
             console.log("animation completed ", dk.drinker.anims.currentAnim.key);
             if (dk.drinker.anims.currentAnim.key === dk.playState("in")){
@@ -45,8 +46,9 @@ export class Drinker{
 
                 if (dk.percentDrink === 100){
                     dk.drinker.play( dk.playState("resp100")); 
+                    dk.progressbar.addProgress(10);
                 } else if (dk.percentDrink === 75) {
-                    dk.drinker.play( dk.playState("resp75")); 
+                    dk.drinker.play( dk.playState("resp75"));                     
                 } else if (dk.percentDrink === 50) {
                     dk.drinker.play( dk.playState("resp50")); 
                 } else if (dk.percentDrink === 25) {
@@ -54,6 +56,7 @@ export class Drinker{
                 } else if (dk.percentDrink === -50) {
                     dk.drinker.play( dk.playState("resp25")); 
                 }
+                dk.scorePoint.addPoint(dk.percentDrink);
             } else if (dk.drinker.anims.currentAnim.key.substring(2, 6) === "resp"){                
                 dk.cntDrink += 1;
                 if (dk.cntDrink < dk.totalDrink) {
@@ -75,7 +78,6 @@ export class Drinker{
         this.drinker.play(this.playState("drink"));
     }
     addPoint( point, x, y) {
-        // let txtPoint = point;
         var txtPoint = (point>0)? "+" + point: "" + point;
         let bitmapFont = this.scene.add.bitmapText(x, y, 'atari', txtPoint)
             .setOrigin(0.5);
@@ -91,6 +93,11 @@ export class Drinker{
                 bitmapFont.destroy();
             }
         });
+    }
+
+    setPointObject(progressbar, scorePoint){
+        this.progressbar = progressbar;
+        this.scorePoint = scorePoint;
     }
 }
 const CHARACTER_WAITING = "WAITING";
