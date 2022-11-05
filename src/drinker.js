@@ -30,7 +30,8 @@ export class Drinker{
     }
     create(){
         UserDrink.createAnimation(this.scene);                
-        this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, 800, this.playState('waiting'));
+        this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, 1060, this.playState('waiting'));
+        this.drinker.setOrigin(0.5, 1);
         let dk = this;
 
         this.drinker.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {            
