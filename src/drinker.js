@@ -5,6 +5,8 @@ import atariXml from './assets/fonts/atari-smooth.xml';
 
 import sndrespOne100Mp3 from "./assets/sounds/resp_1_100.mp3";
 import sndrespOne100Ogg from "./assets/sounds/resp_1_100.ogg";
+import sndrespOneOtherMp3 from "./assets/sounds/resp_1_other.mp3";
+import sndrespOneOtherOgg from "./assets/sounds/resp_1_other.ogg";
 
 
 export class Drinker{
@@ -22,10 +24,12 @@ export class Drinker{
         UserDrink.loadImage(this.scene);
         this.scene.load.bitmapFont('atari', atariPng, atariXml);        
         this.scene.load.audio('sndrespOne1-100', [sndrespOne100Mp3, sndrespOne100Ogg]);
+        this.scene.load.audio('sndrespOne1-other', [sndrespOneOtherMp3, sndrespOneOtherOgg]);
     }        
     
     create(){
         this.sndRespOne100 = this.scene.sound.add('sndrespOne1-100');
+        this.sndRespOneOther = this.scene.sound.add('sndrespOne1-other');
 
         UserDrink.createAnimation(this.scene);                
         this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, 1060, this.playState('waiting'));
@@ -48,9 +52,11 @@ export class Drinker{
                     dk.drinker.play( dk.playState("resp100")); 
                     dk.progressbar.addProgress(10);
                 } else if (dk.percentDrink === 75) {
-                    dk.drinker.play( dk.playState("resp75"));                     
+                    dk.drinker.play( dk.playState("resp75"));
+                    dk.sndRespOneOther.play();                     
                 } else if (dk.percentDrink === 50) {
-                    dk.drinker.play( dk.playState("resp50")); 
+                    dk.drinker.play( dk.playState("resp50"));
+                    dk.sndRespOneOther.play(); 
                 } else if (dk.percentDrink === 25) {
                     dk.drinker.play( dk.playState("resp25")); 
                 } else if (dk.percentDrink === -50) {
