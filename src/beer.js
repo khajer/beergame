@@ -38,6 +38,9 @@ import beerOver_2 from './assets/images/glasses/1/over/2.png';
 import beerOver_3 from './assets/images/glasses/1/over/3.png';
 import beerOver_4 from './assets/images/glasses/1/over/4.png';
 
+import sndPourMp3 from "./assets/sounds/pour.mp3";
+import sndPourOgg from "./assets/sounds/pour.ogg";
+
 export class Beer {
     constructor(scene){
         this.scene = scene;
@@ -83,9 +86,13 @@ export class Beer {
         this.scene.load.image('beerOver_2', beerOver_2);
         this.scene.load.image('beerOver_3', beerOver_3);
         this.scene.load.image('beerOver_4', beerOver_4);
+
+        this.scene.load.audio('pour', [sndPourMp3, sndPourOgg]);
     }
 
     create(){
+        this.sndPour = this.scene.sound.add('pour');
+
         this.scene.anims.create({
             key: 'beerplay',
             frames: [
@@ -178,9 +185,10 @@ export class Beer {
             this.beer.anims.timeScale = speed;
             isOverFlow = false;
                     
-            console.log(this.beer.anims)
-            console.log("beer");
+            // console.log(this.beer.anims)
+            // console.log("beer");
             this.beer.play('beerplay');
+            this.sndPour.play();
             
         })
         .on('pointerup', ()=>{

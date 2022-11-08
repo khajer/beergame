@@ -3,6 +3,10 @@ import {UserDrink} from "./UserDrink.js"
 import atariPng from "./assets/fonts/atari-smooth.png";
 import atariXml from './assets/fonts/atari-smooth.xml';
 
+import sndrespOne100Mp3 from "./assets/sounds/resp_1_100.mp3";
+import sndrespOne100Ogg from "./assets/sounds/resp_1_100.ogg";
+
+
 export class Drinker{
     constructor(scene){
         this.scene = scene;
@@ -16,19 +20,13 @@ export class Drinker{
 
     preload(){
         UserDrink.loadImage(this.scene);
-        this.scene.load.bitmapFont('atari', atariPng, atariXml);
+        this.scene.load.bitmapFont('atari', atariPng, atariXml);        
+        this.scene.load.audio('sndrespOne1-100', [sndrespOne100Mp3, sndrespOne100Ogg]);
     }        
-    playState(stateName){        
-        return this.drinkerType +"-"+stateName;               
-    }
-
-    setDrinkerComeIn(drinkerType, totalDrink){
-        this.drinkerType = drinkerType;
-        this.drinker.play(this.playState("in"));
-        this.cntDrink = 0;
-        this.totalDrink = totalDrink;
-    }
+    
     create(){
+        this.sndRespOne100 = this.scene.sound.add('sndrespOne1-100');
+
         UserDrink.createAnimation(this.scene);                
         this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, 1060, this.playState('waiting'));
         this.drinker.setOrigin(0.5, 1);
@@ -46,6 +44,7 @@ export class Drinker{
                 dk.addPoint(dk.percentDrink, dk.scene.game.config.width / 2, 800); 
 
                 if (dk.percentDrink === 100){
+                    dk.sndRespOne100.play();
                     dk.drinker.play( dk.playState("resp100")); 
                     dk.progressbar.addProgress(10);
                 } else if (dk.percentDrink === 75) {
@@ -70,6 +69,16 @@ export class Drinker{
                 dk.mapEvent.get(CHARACTER_OUT)();         
             }                                        
         }, this.scene);
+    }
+    playState(stateName){        
+        return this.drinkerType + "-" + stateName;               
+    }
+
+    setDrinkerComeIn(drinkerType, totalDrink){
+        this.drinkerType = drinkerType;
+        this.drinker.play(this.playState("in"));
+        this.cntDrink = 0;
+        this.totalDrink = totalDrink;
     }
     addEvent(eventName, callback){
         this.mapEvent.set(eventName, callback);        
