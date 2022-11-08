@@ -47,47 +47,51 @@ export class Beer {
         this.mapEvent = new Map();
         this.availablePour = false;
     }
+
     preload(){
-        this.scene.load.image('beer1', beer1);
-        this.scene.load.image('beer2', beer2);
-        this.scene.load.image('beer3', beer3);
-        this.scene.load.image('beer4', beer4);
-        this.scene.load.image('beer5', beer5);
-        this.scene.load.image('beer6', beer6);
-        this.scene.load.image('beer7', beer7);
-        this.scene.load.image('beer8', beer8);
-        this.scene.load.image('beer9', beer9);
-        this.scene.load.image('beer10', beer10);
-        this.scene.load.image('beer11', beer11);
-        this.scene.load.image('beer12', beer12);
-        this.scene.load.image('beer13', beer13);
 
-        this.scene.load.image('beer25_1', beer25_1);
-        this.scene.load.image('beer25_2', beer25_2);
-        this.scene.load.image('beer25_3', beer25_3);
-        this.scene.load.image('beer25_4', beer25_4);
+    }
+    static loading(scene){
+        scene.load.image('beer1', beer1);
+        scene.load.image('beer2', beer2);
+        scene.load.image('beer3', beer3);
+        scene.load.image('beer4', beer4);
+        scene.load.image('beer5', beer5);
+        scene.load.image('beer6', beer6);
+        scene.load.image('beer7', beer7);
+        scene.load.image('beer8', beer8);
+        scene.load.image('beer9', beer9);
+        scene.load.image('beer10', beer10);
+        scene.load.image('beer11', beer11);
+        scene.load.image('beer12', beer12);
+        scene.load.image('beer13', beer13);
 
-        this.scene.load.image('beer50_1', beer50_1);
-        this.scene.load.image('beer50_2', beer50_2);
-        this.scene.load.image('beer50_3', beer50_3);
-        this.scene.load.image('beer50_4', beer50_4);
+        scene.load.image('beer25_1', beer25_1);
+        scene.load.image('beer25_2', beer25_2);
+        scene.load.image('beer25_3', beer25_3);
+        scene.load.image('beer25_4', beer25_4);
 
-        this.scene.load.image('beer75_1', beer75_1);
-        this.scene.load.image('beer75_2', beer75_2);
-        this.scene.load.image('beer75_3', beer75_3);
-        this.scene.load.image('beer75_4', beer75_4);
+        scene.load.image('beer50_1', beer50_1);
+        scene.load.image('beer50_2', beer50_2);
+        scene.load.image('beer50_3', beer50_3);
+        scene.load.image('beer50_4', beer50_4);
 
-        this.scene.load.image('beer100_1', beer100_1);
-        this.scene.load.image('beer100_2', beer100_2);
-        this.scene.load.image('beer100_3', beer100_3);
-        this.scene.load.image('beer100_4', beer100_4);
+        scene.load.image('beer75_1', beer75_1);
+        scene.load.image('beer75_2', beer75_2);
+        scene.load.image('beer75_3', beer75_3);
+        scene.load.image('beer75_4', beer75_4);
 
-        this.scene.load.image('beerOver_1', beerOver_1);
-        this.scene.load.image('beerOver_2', beerOver_2);
-        this.scene.load.image('beerOver_3', beerOver_3);
-        this.scene.load.image('beerOver_4', beerOver_4);
+        scene.load.image('beer100_1', beer100_1);
+        scene.load.image('beer100_2', beer100_2);
+        scene.load.image('beer100_3', beer100_3);
+        scene.load.image('beer100_4', beer100_4);
 
-        this.scene.load.audio('pour', [sndPourMp3, sndPourOgg]);
+        scene.load.image('beerOver_1', beerOver_1);
+        scene.load.image('beerOver_2', beerOver_2);
+        scene.load.image('beerOver_3', beerOver_3);
+        scene.load.image('beerOver_4', beerOver_4);
+
+        scene.load.audio('pour', [sndPourMp3, sndPourOgg]);
     }
 
     create(){

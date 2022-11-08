@@ -10,7 +10,10 @@ export class ScorePoint {
     }
 
     preload(){
-        this.scene.load.bitmapFont('atari-1', atariPng, atariXml);
+        
+    }
+    static loading(scene){
+        scene.load.bitmapFont('atari-1', atariPng, atariXml);
     }
 
     create(){        

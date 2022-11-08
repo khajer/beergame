@@ -54,11 +54,15 @@ export class ProgressBar {
         }
         
     }
-    preload(){
-        this.scene.load.image('pg_background', pg_background);
-        this.scene.load.image('pg_mask', pg_mask);
-        this.scene.load.image('pg_progress', pg_progress);
-        this.scene.load.image('timer', timer);
+    preload(){        
+    }
+    static loading(scene){
+        console.log("loading progressbar");
+        scene.load.image('pg_background', pg_background);
+        scene.load.image('pg_mask', pg_mask);
+        scene.load.image('pg_progress', pg_progress);
+        scene.load.image('timer', timer);
+        
     }
 
     addProgress(percentX){

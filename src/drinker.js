@@ -21,10 +21,13 @@ export class Drinker{
     }
 
     preload(){
-        UserDrink.loadImage(this.scene);
-        this.scene.load.bitmapFont('atari', atariPng, atariXml);        
-        this.scene.load.audio('sndrespOne1-100', [sndrespOne100Mp3, sndrespOne100Ogg]);
-        this.scene.load.audio('sndrespOne1-other', [sndrespOneOtherMp3, sndrespOneOtherOgg]);
+        
+    }
+    static loading(scene){
+        UserDrink.loadImage(scene);
+        scene.load.bitmapFont('atari', atariPng, atariXml);        
+        scene.load.audio('sndrespOne1-100', [sndrespOne100Mp3, sndrespOne100Ogg]);
+        scene.load.audio('sndrespOne1-other', [sndrespOneOtherMp3, sndrespOneOtherOgg]);
     }        
     
     create(){
