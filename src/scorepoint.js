@@ -17,7 +17,7 @@ export class ScorePoint {
     }
 
     create(){        
-        this.scorePoint = this.scene.add.bitmapText(100, 100, 'atari-1', this.point)
+        this.scorePoint = this.scene.add.bitmapText(700, 100, 'atari-1', this.point)
             .setOrigin(0.5);
     }
     

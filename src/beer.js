@@ -11,6 +11,8 @@ import beer10 from './assets/images/glasses/1/play/10.png';
 import beer11 from './assets/images/glasses/1/play/11.png';
 import beer12 from './assets/images/glasses/1/play/12.png';
 import beer13 from './assets/images/glasses/1/play/13.png';
+import beer14 from './assets/images/glasses/1/play/14.png';
+import beer15 from './assets/images/glasses/1/play/15.png';
 
 import beer25_1 from './assets/images/glasses/1/25/1.png';
 import beer25_2 from './assets/images/glasses/1/25/2.png';
@@ -41,6 +43,8 @@ import beerOver_4 from './assets/images/glasses/1/over/4.png';
 import sndPourMp3 from "./assets/sounds/pour.mp3";
 import sndPourOgg from "./assets/sounds/pour.ogg";
 
+import tap from './assets/images/objects/tap.png';
+
 export class Beer {
     constructor(scene){
         this.scene = scene;
@@ -52,6 +56,9 @@ export class Beer {
 
     }
     static loading(scene){
+
+        scene.load.image('tap', tap);
+
         scene.load.image('beer1', beer1);
         scene.load.image('beer2', beer2);
         scene.load.image('beer3', beer3);
@@ -65,6 +72,8 @@ export class Beer {
         scene.load.image('beer11', beer11);
         scene.load.image('beer12', beer12);
         scene.load.image('beer13', beer13);
+        scene.load.image('beer14', beer14);
+        scene.load.image('beer15', beer15);
 
         scene.load.image('beer25_1', beer25_1);
         scene.load.image('beer25_2', beer25_2);
@@ -95,8 +104,76 @@ export class Beer {
     }
 
     create(){
+
         this.sndPour = this.scene.sound.add('pour');
 
+        this.createAnimationKey();
+        
+
+        var speed = 2;
+        var isOverFlow = false;
+
+        this.tap = this.scene.add.sprite((this.scene.game.config.width/2)-170, 1000, 'tap');
+        this.beer = this.scene.add.sprite(this.scene.game.config.width / 2, 1000, 'beer')
+            .play('beerplay')
+            .stop();
+
+        this.beer.setInteractive()
+        .on('pointerdown', ()=>{
+            if (this.availablePour === false){
+                return;
+            }
+            
+            this.beer.play('beerplay');
+            this.beer.anims.timeScale = speed;
+            isOverFlow = false;
+                    
+            this.beer.play('beerplay');
+            this.sndPour.play();
+            
+        })
+        .on('pointerup', ()=>{
+            if (this.availablePour === false){
+                return;
+            }
+            if(!isOverFlow){
+                console.log("up");                
+                const lvl = this.beer.anims.getProgress();
+                this.beer.stop();
+                console.log(lvl);
+                this.beer.anims.timeScale = 1;
+                             
+                
+                if(lvl >= 0.75){
+                    console.log('perfect');
+                    this.beer.play("beer100");
+                    this.mapEvent.get(BEER_COMPLETED_100)();
+                    
+                }else if(lvl >= 0.50){                    
+                    this.beer.play("beer75");
+                    this.mapEvent.get(BEER_COMPLETED_75)();
+                }else if(lvl >= 0.25){                    
+                    this.beer.play("beer50");
+                    this.mapEvent.get(BEER_COMPLETED_50)();
+                }else{
+                    this.beer.play("beer25");
+                    this.mapEvent.get(BEER_COMPLETED_25)();
+                }                
+                speed += 0.1;
+            }
+            
+        });
+        let beer = this.beer;
+        let t = this;
+        this.beer.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
+            isOverFlow = true;
+            beer.anims.timeScale = 1;
+            beer.play("beerOver"); 
+            t.mapEvent.get(BEER_COMPLETED_OVER)();
+
+        }, this.scene);
+    }
+    createAnimationKey(){
         this.scene.anims.create({
             key: 'beerplay',
             frames: [
@@ -112,7 +189,9 @@ export class Beer {
                 { key: 'beer10' },
                 { key: 'beer11' },
                 { key: 'beer12' },
-                { key: 'beer13' }
+                { key: 'beer13' },
+                { key: 'beer14' },
+                { key: 'beer15' }
             ],
             frameRate: 8,
             repeat:0
@@ -172,69 +251,6 @@ export class Beer {
             frameRate: 8,
             repeat:-1
         });
-
-        var speed = 2;
-        var isOverFlow = false;
-
-        this.beer = this.scene.add.sprite(this.scene.game.config.width / 2, 1000, 'beer')
-            .play('beerplay').stop();
-
-        this.beer.setInteractive()
-        .on('pointerdown', ()=>{
-            if (this.availablePour === false){
-                return;
-            }
-            
-            this.beer.play('beerplay');
-            this.beer.anims.timeScale = speed;
-            isOverFlow = false;
-                    
-            // console.log(this.beer.anims)
-            // console.log("beer");
-            this.beer.play('beerplay');
-            this.sndPour.play();
-            
-        })
-        .on('pointerup', ()=>{
-            if (this.availablePour === false){
-                return;
-            }
-            if(!isOverFlow){
-                console.log("up");                
-                const lvl = this.beer.anims.getProgress();
-                this.beer.stop();
-                console.log(lvl);
-                this.beer.anims.timeScale = 1;
-                             
-                
-                if(lvl >= 0.75){
-                    console.log('perfect');
-                    this.beer.play("beer100");
-                    this.mapEvent.get(BEER_COMPLETED_100)();
-                    
-                }else if(lvl >= 0.50){                    
-                    this.beer.play("beer75");
-                    this.mapEvent.get(BEER_COMPLETED_75)();
-                }else if(lvl >= 0.25){                    
-                    this.beer.play("beer50");
-                    this.mapEvent.get(BEER_COMPLETED_50)();
-                }else{
-                    this.beer.play("beer25");
-                    this.mapEvent.get(BEER_COMPLETED_25)();
-                }                
-                speed += 0.1;
-            }
-            
-        });
-        let beer = this.beer;
-        let t = this;
-        this.beer.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
-            isOverFlow = true;
-            beer.anims.timeScale = 1;
-            beer.play("beerOver"); 
-            t.mapEvent.get(BEER_COMPLETED_OVER)();
-
-        }, this.scene);
     }
 
     hide() {
