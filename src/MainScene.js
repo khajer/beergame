@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 
 import background from './assets/images/backgrounds/1.png';
+import logo from './assets/images/objects/logo.png';
+import howto from './assets/images/objects/howto.png';
 import sndBgMp3 from "./assets/sounds/bg.mp3";
 import sndBgOgg from "./assets/sounds/bg.ogg";
 
@@ -33,11 +35,7 @@ export class MainScene extends Phaser.Scene
     }
 
     preload ()
-    {   
-        this.load.image('background', background);     
-        
-        this.load.audio('sndBg', [sndBgMp3, sndBgOgg]);
-        
+    {           
         this.objGames.forEach(e=>{
             if (e.preload !== undefined){
                 e.preload();
@@ -54,17 +52,75 @@ export class MainScene extends Phaser.Scene
             seek: 0,
             loop: true,
             delay: 0
-        });
-        this.sndBg.play();
-        
+        });        
+        this.sndBg.play();        
         
         this.background = this.add.sprite(this.game.config.width / 2, 520, 'background');
+        this.showlogoAndHowToPlay();  
+        
+    }
+    static loading(scene){
+
+        scene.load.image('background', background);     
+        scene.load.image('howto', howto);
+        scene.load.image('logo', logo);
+        scene.load.audio('sndBg', [sndBgMp3, sndBgOgg]);
+    }
+
+    showlogoAndHowToPlay(){
+        let hide = false;
+        let logo = this.add.sprite(this.game.config.width / 2, 580, 'logo');
+        logo.setInteractive()
+        .on('pointerdown', ()=>{
+            if (hide) return;
+            hide = true;
+            this.hideLogoAndHowToPlay(logo, howto);
+            
+        });
+
+        this.tweens.add({
+            targets: [logo],
+            scaleX: 0.96,
+            scaleY: 0.96,
+            ease: 'Sine.easeInOut',
+            duration: 2000,
+            delay: 50,
+            repeat: -1,
+            yoyo: true
+        });        
+
+        let howto = this.add.sprite(this.game.config.width / 2, 1220, 'howto');
+        howto.setInteractive()
+        .on('pointerdown', ()=>{
+            if (hide) return;
+            hide = true;
+            this.hideLogoAndHowToPlay(logo, howto);
+        });;
+    }
+    hideLogoAndHowToPlay(logo, howto){
+        this.tweens.add({
+            targets: [logo],
+            y: "-=" + 100,
+            alpha: 0.2,
+            duration: 200,
+            ease: 'Linear',
+            repeat: 0,
+            onComplete:()=>{
+                this.startGame()
+                logo.destroy();
+            }                    
+        })
+
+        howto.destroy();
+    }
+    
+    startGame(){
         this.objGames.forEach(e=>{
             if (e.create !== undefined){
                 e.create();
             }            
         });  
-                
+
         this.setPlayerComeIn();
         this.drinker.setPointObject(this.bar, this.scorePoint);
         this.drinker.addEvent(Drinker.CHARACTER_WAITING , ()=>{
@@ -103,8 +159,6 @@ export class MainScene extends Phaser.Scene
             console.log("game over");            
             this.gameover = true;
         });
-                
-        
     }
 
     setPlayerComeIn(){
@@ -129,7 +183,6 @@ export class MainScene extends Phaser.Scene
         }, this.timeDelayPourCompleted);
     }
     
-
     update(){
         this.objGames.forEach(e=>{            
             if(e.update !== undefined){

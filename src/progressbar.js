@@ -42,7 +42,7 @@ export class ProgressBar {
 
     }
     update(){
-        if( this.gameover === true){
+        if( this.gameover === true  || this.pgProgress === undefined){
             return;
         }
         if(this.pgProgress.x + (this.pgBackground.width/2) > this.pgBackground.width/2){

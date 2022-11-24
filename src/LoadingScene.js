@@ -6,6 +6,7 @@ import {ProgressBar} from './progressbar.js';
 import {ScorePoint} from './scorepoint.js'
 import {Beer} from './beer.js'
 import {Drinker} from './drinker.js'
+import {MainScene} from './MainScene.js'
 
 export class LoadingScene extends Phaser.Scene
 {    
@@ -36,7 +37,7 @@ export class LoadingScene extends Phaser.Scene
         ScorePoint.loading(this);
         Beer.loading(this);
         Drinker.loading(this);
-        
+        MainScene.loading(this);
 
 		this.load.on('progress', this.onProgress, this );
 
