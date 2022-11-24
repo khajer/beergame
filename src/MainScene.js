@@ -58,7 +58,7 @@ export class MainScene extends Phaser.Scene
         this.sndBg.play();
         
         
-        this.background = this.add.sprite(this.game.config.width / 2, 500, 'background');
+        this.background = this.add.sprite(this.game.config.width / 2, 520, 'background');
         this.objGames.forEach(e=>{
             if (e.create !== undefined){
                 e.create();
