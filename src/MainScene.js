@@ -6,6 +6,9 @@ import howto from './assets/images/objects/howto.png';
 import sndBgMp3 from "./assets/sounds/bg.mp3";
 import sndBgOgg from "./assets/sounds/bg.ogg";
 
+import flaresPng from './assets/particles/flares.png';
+import flaresJson from './assets/particles/flares.json';
+
 
 import {ProgressBar} from './progressbar.js';
 import {ScorePoint} from './scorepoint.js'
@@ -57,6 +60,8 @@ export class MainScene extends Phaser.Scene
         
         this.background = this.add.sprite(this.game.config.width / 2, 520, 'background');
         this.showlogoAndHowToPlay();  
+
+        this.particles = this.add.particles('flares');
         
     }
     static loading(scene){
@@ -65,6 +70,8 @@ export class MainScene extends Phaser.Scene
         scene.load.image('howto', howto);
         scene.load.image('logo', logo);
         scene.load.audio('sndBg', [sndBgMp3, sndBgOgg]);
+        
+        scene.load.atlas('flares', flaresPng, flaresJson);
     }
 
     showlogoAndHowToPlay(){
@@ -158,7 +165,26 @@ export class MainScene extends Phaser.Scene
         this.bar.addGameoverFunc(()=>{
             console.log("game over");            
             this.gameover = true;
+
+            this.showGameover();
+
         });
+    }
+
+    showGameover(){
+        let par = this.particles.createEmitter({
+            frame: [ 'red', 'yellow', 'green' ],
+            x: 400, y: 300,
+            lifespan: 1000,
+            speed: { min: 100, max: 250 },
+            scale: { start: 0.4, end: 0 },
+            gravityY: 150,
+            blendMode: 'ADD'
+        });
+        setTimeout(()=>{
+            par.stop();
+        }, 500);
+
     }
 
     setPlayerComeIn(){
