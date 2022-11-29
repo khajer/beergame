@@ -201,7 +201,7 @@ export class MainScene extends Phaser.Scene
             });
             this.resetStartGame();
             
-        }, 100);
+        }, 50);
 
         
 
