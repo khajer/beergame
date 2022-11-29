@@ -7,28 +7,23 @@ import Phaser from 'phaser';
 export class ScorePoint {
     constructor(scene) {
         this.scene = scene;
-        this.point = 0;
-        this.targetPoint = 0;
     }
 
-    preload(){
-        
-    }
+    preload(){}
+
     static loading(scene){
-        scene.load.bitmapFont('atari-1', atariPng, atariXml);
-        
+        scene.load.bitmapFont('atari-1', atariPng, atariXml);    
     }
 
     create(){        
         this.scorePoint = this.scene.add.bitmapText(760, 170, 'atari-1', this.point, 38) // 760, 120
             .setOrigin(1);
+        this.reset();
 
     }
     
     update(){
-        if(this.point === this.targetPoint){
-            return;
-        }
+        if (this.point === this.targetPoint ) return;
 
         if(this.point < this.targetPoint){
             this.point += 5;
@@ -39,6 +34,12 @@ export class ScorePoint {
     }
     addPoint(point){
         this.targetPoint += point;
+    }
+    reset(){
+        this.point = 0;
+        this.targetPoint = 0;
+        this.scorePoint.setText(this.point);
+
     }
 
 }

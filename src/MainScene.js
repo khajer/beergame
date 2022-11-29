@@ -105,6 +105,7 @@ export class MainScene extends Phaser.Scene
         });;
     }
     hideLogoAndHowToPlay(logo, howto){
+        
         this.tweens.add({
             targets: [logo],
             y: "-=" + 100,
@@ -117,10 +118,19 @@ export class MainScene extends Phaser.Scene
                 logo.destroy();
             }                    
         })
-
+    
         howto.destroy();
     }
     
+    resetStartGame(){  
+        this.objGames.forEach(e=>{
+            if (e.reset !== undefined){
+                e.reset();
+            }            
+        });        
+        this.setPlayerComeIn();
+
+    }
     startGame(){
         this.objGames.forEach(e=>{
             if (e.create !== undefined){
@@ -165,7 +175,6 @@ export class MainScene extends Phaser.Scene
         this.bar.addGameoverFunc(()=>{
             console.log("game over");            
             this.gameover = true;
-
             this.showGameover();
 
         });
@@ -175,7 +184,7 @@ export class MainScene extends Phaser.Scene
         let par = this.particles.createEmitter({
             frame: [ 'red', 'yellow', 'green' ],
             x: 400, y: 300,
-            lifespan: 1000,
+            lifespan: 500,
             speed: { min: 100, max: 250 },
             scale: { start: 0.4, end: 0 },
             gravityY: 150,
@@ -183,7 +192,11 @@ export class MainScene extends Phaser.Scene
         });
         setTimeout(()=>{
             par.stop();
+            this.resetStartGame();
+            
         }, 500);
+
+        
 
     }
 

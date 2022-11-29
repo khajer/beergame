@@ -41,27 +41,19 @@ export class LoadingScene extends Phaser.Scene
 
 		this.load.on('progress', this.onProgress, this );
 
-
-
     }      
     
-    create (){       
-        
-        this.scene.start('MainScene');
-        
+    create (){               
+        this.scene.start('MainScene');        
     }
 
     onProgress(value) {
-		if (this.preloadSprite)
-		{
-			var w = Math.floor(this.preloadSprite.width * value);
-		
+		if (this.preloadSprite) {
+			var w = Math.floor(this.preloadSprite.width * value);		
 			this.preloadSprite.sprite.frame.width    = (w <= 0 ? 1 : w);
 			this.preloadSprite.sprite.frame.cutWidth = w;
-
 			this.preloadSprite.sprite.frame.updateUVs();
 		}
 	}
-
      
 }

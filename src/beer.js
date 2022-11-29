@@ -105,8 +105,9 @@ export class Beer {
     }
 
     create(){
-
-        this.sndPour = this.scene.sound.add('pour');
+        if (this.sndPour === undefined){
+            this.sndPour = this.scene.sound.add('pour');
+        }
 
         this.createAnimationKey();
         var isPressed = false;
@@ -120,9 +121,7 @@ export class Beer {
 
         this.beer.setInteractive()
         .on('pointerdown', ()=>{
-            if (this.availablePour === false){
-                return;
-            }
+            if (this.availablePour === false){return;}
             
             this.beer.play('beerplay');
             this.beer.anims.timeScale = speed;
@@ -133,13 +132,8 @@ export class Beer {
             
         })
         .on('pointerup', ()=>{
-            if (this.availablePour === false){
-                return;
-            }
-
-            if(this.isBeerOver === true){
-                return;
-            }
+            if (this.availablePour === false){return;}
+            if(this.isBeerOver === true){return;}
         
             this.currBeerlevel = this.beer.anims.getProgress();
             this.beer.stop();
@@ -178,8 +172,6 @@ export class Beer {
                     t.isBeerOver = false;
                     return;
                 }
-
-                console.log(t.currBeerlevel);
                 if(t.currBeerlevel >= 0.75){
                     t.mapEvent.get(BEER_COMPLETED_100)();                    
                 }else if(t.currBeerlevel >= 0.50){                                        
@@ -195,6 +187,7 @@ export class Beer {
 
         }, this.scene);
     }
+    
     createAnimationKey(){
         this.scene.anims.create({
             key: 'beerplay',

@@ -79,6 +79,7 @@ export class Drinker{
             }                                        
         }, this.scene);
     }
+    
     playState(stateName){        
         return this.drinkerType + "-" + stateName;               
     }

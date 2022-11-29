@@ -11,6 +11,11 @@ export class ProgressBar {
         this.scene = scene;
         
     }
+
+    reset(){
+        this.gameover = false;
+        this.pgProgress.x = this.scene.game.config.width / 2;
+    }
     create(){
         this.pgBackground = this.scene.make.image({
             x: this.scene.game.config.width / 2,
