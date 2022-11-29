@@ -181,20 +181,27 @@ export class MainScene extends Phaser.Scene
     }
 
     showGameover(){
-        let par = this.particles.createEmitter({
-            frame: [ 'red', 'yellow', 'green' ],
-            x: 400, y: 300,
-            lifespan: 500,
-            speed: { min: 100, max: 250 },
-            scale: { start: 0.4, end: 0 },
-            gravityY: 150,
-            blendMode: 'ADD'
-        });
+        let pars = [];
+        for(var i=0; i< 4; i++){
+            let par = this.particles.createEmitter({
+                frame: [ 'red', 'yellow', 'green', 'white' ],
+                x: 400 + (i*50), y: 300 ,
+                lifespan: 1000,
+                speed: { min: 100, max: 250 },
+                scale: { start: 0.2, end: 0 },
+                gravityY: 500,
+                blendMode: 'ADD'
+            });
+            pars.push(par);
+        }
+        
         setTimeout(()=>{
-            par.stop();
+            pars.forEach((e)=>{
+                e.stop();
+            });
             this.resetStartGame();
             
-        }, 500);
+        }, 100);
 
         
 
