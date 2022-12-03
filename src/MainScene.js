@@ -3,12 +3,13 @@ import Phaser from 'phaser';
 import background from './assets/images/backgrounds/1.png';
 import logo from './assets/images/objects/logo.png';
 import howto from './assets/images/objects/howto.png';
+import btnPlayAgain from './assets/images/objects/btnPlayAgain.png';
+import bgFinalScore from './assets/images/objects/bgFinalScore.png';
 import sndBgMp3 from "./assets/sounds/bg.mp3";
 import sndBgOgg from "./assets/sounds/bg.ogg";
 
 import flaresPng from './assets/particles/flares.png';
 import flaresJson from './assets/particles/flares.json';
-
 
 import {ProgressBar} from './progressbar.js';
 import {ScorePoint} from './scorepoint.js'
@@ -60,15 +61,15 @@ export class MainScene extends Phaser.Scene
         
         this.background = this.add.sprite(this.game.config.width / 2, 520, 'background');
         this.showlogoAndHowToPlay();  
-
-        this.particles = this.add.particles('flares');
         
     }
     static loading(scene){
-
         scene.load.image('background', background);     
         scene.load.image('howto', howto);
         scene.load.image('logo', logo);
+        scene.load.image('btnPlayAgain', btnPlayAgain);
+        scene.load.image('bgFinalScore', bgFinalScore);
+
         scene.load.audio('sndBg', [sndBgMp3, sndBgOgg]);
         
         scene.load.atlas('flares', flaresPng, flaresJson);
@@ -181,30 +182,45 @@ export class MainScene extends Phaser.Scene
     }
 
     showGameover(){
+        let bgFinalScore = this.add.sprite(this.game.config.width / 2, 780, 'bgFinalScore');
+        let txtFinallScore = this.add.bitmapText(this.game.config.width / 2, 790, 'atari-1', this.scorePoint.point, 60).setOrigin(0.5);
+        let btnPlayAgain = this.add.sprite(this.game.config.width / 2, 900, 'btnPlayAgain')
+            .setInteractive()
+            .on('pointerdown', ()=>{
+            this.resetStartGame();                        
+            btnPlayAgain.destroy();
+            bgFinalScore.destroy();
+            txtFinallScore.destroy();
+        });
+
+        if (this.particles){
+            this.particles.destroy();          
+        }
+        this.particles = this.add.particles('flares');
+
         let pars = [];
+
         for(var i=0; i< 4; i++){
             let par = this.particles.createEmitter({
                 frame: [ 'red', 'yellow', 'green', 'white' ],
-                x: 400 + (i*50), y: 300 ,
+                x: (this.game.config.width / 2) + (i*50), y: 780  ,
                 lifespan: 1000,
                 speed: { min: 100, max: 250 },
                 scale: { start: 0.2, end: 0 },
                 gravityY: 500,
-                blendMode: 'ADD'
+                blendMode: 'ADD',
+                
             });
+            
             pars.push(par);
         }
+        
         
         setTimeout(()=>{
             pars.forEach((e)=>{
                 e.stop();
-            });
-            this.resetStartGame();
-            
+            });            
         }, 50);
-
-        
-
     }
 
     setPlayerComeIn(){

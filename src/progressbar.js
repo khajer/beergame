@@ -55,9 +55,7 @@ export class ProgressBar {
         }else{            
             this.gameover = true;
             this.cb();
-            
         }
-        
     }
     preload(){        
     }
@@ -75,6 +73,7 @@ export class ProgressBar {
             this.pgProgress.x += this.pgProgress.width/100 * percentX;
         }        
     }
+    
     addGameoverFunc(cb){
         this.cb = cb;
     }
