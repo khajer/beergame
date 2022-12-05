@@ -203,7 +203,7 @@ export class MainScene extends Phaser.Scene
         for(var i=0; i< 4; i++){
             let par = this.particles.createEmitter({
                 frame: [ 'red', 'yellow', 'green', 'white' ],
-                x: (this.game.config.width / 2) + (i*50), y: 780  ,
+                x: (this.game.config.width / 2) - (100) + (i*50), y: 780  ,
                 lifespan: 1000,
                 speed: { min: 100, max: 250 },
                 scale: { start: 0.2, end: 0 },

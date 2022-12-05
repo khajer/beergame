@@ -6,7 +6,7 @@ import pg_progress from './assets/images/progressbar/progress.png';
 import timer from './assets/images/objects/timer.png';
 
 export class ProgressBar {
-    constructor (scene, reduceSpeed = 0.5){
+    constructor (scene, reduceSpeed = 0.4){
         this.reduceSpeed = reduceSpeed;
         this.scene = scene;
         
