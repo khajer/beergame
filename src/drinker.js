@@ -9,6 +9,9 @@ import sndrespOneOtherMp3 from "./assets/sounds/resp_1_other.mp3";
 import sndrespOneOtherOgg from "./assets/sounds/resp_1_other.ogg";
 
 const DRINKER_POS_Y = 347; //343
+const ADDPOINTTEXT_FONT_SIZE = 26;
+const ADD_POINT_Y = 270;//800; 
+
 export class Drinker{
     constructor(scene){
         this.scene = scene;
@@ -48,7 +51,7 @@ export class Drinker{
                 }
             } else if (dk.drinker.anims.currentAnim.key ===  dk.playState("drink")){
                 
-                dk.addPoint(dk.percentDrink, dk.scene.game.config.width / 2, 800); 
+                dk.addPoint(dk.percentDrink, dk.scene.game.config.width / 2, ADD_POINT_Y); 
 
                 if (dk.percentDrink === 100){
                     dk.sndRespOne100.play();
@@ -97,11 +100,12 @@ export class Drinker{
         this.percentDrink = percentDrink;
         this.drinker.play(this.playState("drink"));
     }
+    
     addPoint( point, x, y) {
         var txtPoint = (point>0)? "+" + point: "" + point;
         let bitmapFont = this.scene.add.bitmapText(x, y, 'atari', txtPoint)
             .setOrigin(0.5)
-            .setFontSize(40);
+            .setFontSize(ADDPOINTTEXT_FONT_SIZE);
 
         this.scene.tweens.add({
             targets: [bitmapFont],

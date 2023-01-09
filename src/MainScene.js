@@ -21,6 +21,12 @@ const BACKGROND_H = 520/3;
 const HOWTO_H = 1220/3;
 const TIMEDELAY = 200;
 
+const BTN_PLAYAGIN_Y = 300;
+const BTN_FINALSCORE_Y = 260;// 780;
+const TXT_FINALSCORE_Y = 265; //790 /3 
+const FONT_TXT_FINAL_SIZE = 20;
+const PARTICLE_Y = 260; //780;
+
 export class MainScene extends Phaser.Scene
 {    
     constructor ()
@@ -187,9 +193,10 @@ export class MainScene extends Phaser.Scene
     }
 
     showGameover(){
-        let bgFinalScore = this.add.sprite(this.game.config.width / 2, 780, 'bgFinalScore');
-        let txtFinallScore = this.add.bitmapText(this.game.config.width / 2, 790, 'atari-1', this.scorePoint.point, 60).setOrigin(0.5);
-        let btnPlayAgain = this.add.sprite(this.game.config.width / 2, 900, 'btnPlayAgain')
+        
+        let bgFinalScore = this.add.sprite(this.game.config.width / 2, BTN_FINALSCORE_Y, 'bgFinalScore');
+        let txtFinallScore = this.add.bitmapText(this.game.config.width / 2, TXT_FINALSCORE_Y, 'atari-1', this.scorePoint.point, FONT_TXT_FINAL_SIZE).setOrigin(0.5);        
+        let btnPlayAgain = this.add.sprite(this.game.config.width / 2, BTN_PLAYAGIN_Y, 'btnPlayAgain')
             .setInteractive()
             .on('pointerdown', ()=>{
             this.resetStartGame();                        
@@ -204,11 +211,12 @@ export class MainScene extends Phaser.Scene
         this.particles = this.add.particles('flares');
 
         let pars = [];
-
+        
         for(var i=0; i< 4; i++){
             let par = this.particles.createEmitter({
                 frame: [ 'red', 'yellow', 'green', 'white' ],
-                x: (this.game.config.width / 2) - (100) + (i*50), y: 780  ,
+                x: (this.game.config.width / 2) - (100) + (i*50), 
+                y: PARTICLE_Y,
                 lifespan: 1000,
                 speed: { min: 100, max: 250 },
                 scale: { start: 0.2, end: 0 },
