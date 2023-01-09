@@ -8,7 +8,7 @@ import sndrespOne100Ogg from "./assets/sounds/resp_1_100.ogg";
 import sndrespOneOtherMp3 from "./assets/sounds/resp_1_other.mp3";
 import sndrespOneOtherOgg from "./assets/sounds/resp_1_other.ogg";
 
-
+const DRINKER_POS_Y = 347; //343
 export class Drinker{
     constructor(scene){
         this.scene = scene;
@@ -35,7 +35,7 @@ export class Drinker{
         this.sndRespOneOther = this.scene.sound.add('sndrespOne1-other');
 
         UserDrink.createAnimation(this.scene);                
-        this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, 1060, this.playState('waiting'));
+        this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, DRINKER_POS_Y, this.playState('waiting'));
         this.drinker.setOrigin(0.5, 1);
         let dk = this;
 
