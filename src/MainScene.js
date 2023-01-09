@@ -25,7 +25,7 @@ const BTN_PLAYAGIN_Y = 300;
 const BTN_FINALSCORE_Y = 260;// 780;
 const TXT_FINALSCORE_Y = 265; //790 /3 
 const FONT_TXT_FINAL_SIZE = 20;
-const PARTICLE_Y = 260; //780;
+const PARTICLE_Y = 240; //780;
 
 export class MainScene extends Phaser.Scene
 {    
