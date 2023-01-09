@@ -117,7 +117,7 @@ export class Beer {
 
         var speed = 2;
         
-        const tap_pos_x = (this.scene.game.config.width/2)-56;
+        const tap_pos_x = (this.scene.game.config.width/2) - 56;
         this.tap = this.scene.add.sprite(tap_pos_x, TAP_POS_Y, 'tap');
         this.beer = this.scene.add.sprite(this.scene.game.config.width / 2, BEER_POS_Y, 'beer')
             .play('beerplay')
