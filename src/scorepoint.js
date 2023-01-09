@@ -1,9 +1,11 @@
 import atariPng from "./assets/fonts/atari-smooth-1.png";
 import atariXml from './assets/fonts/atari-smooth.xml';
 
-import Phaser from 'phaser';
+// import Phaser from 'phaser';
 
 
+const FONT_Y = 65;
+const FONT_SIZE = 16;
 export class ScorePoint {
     constructor(scene) {
         this.scene = scene;
@@ -16,7 +18,8 @@ export class ScorePoint {
     }
 
     create(){        
-        this.scorePoint = this.scene.add.bitmapText(760, 170, 'atari-1', this.point, 38) // 760, 120
+        const FONT_POS_X = (this.scene.game.config.width / 2) + 88;
+        this.scorePoint = this.scene.add.bitmapText(FONT_POS_X, FONT_Y, 'atari-1', this.point, FONT_SIZE) // 760, 120
             .setOrigin(1);
         this.reset();
 

@@ -5,8 +5,11 @@ import pg_progress from './assets/images/progressbar/progress.png';
 
 import timer from './assets/images/objects/timer.png';
 
+const PROGRESS_Y = 40;
+const REDUCE_SPEED = 0.4;
+
 export class ProgressBar {
-    constructor (scene, reduceSpeed = 0.4){
+    constructor (scene, reduceSpeed = REDUCE_SPEED){
         this.reduceSpeed = reduceSpeed;
         this.scene = scene;
         
@@ -19,28 +22,28 @@ export class ProgressBar {
     create(){
         this.pgBackground = this.scene.make.image({
             x: this.scene.game.config.width / 2,
-            y: 100,
+            y: PROGRESS_Y,
             key: 'pg_background',
             add: true
         });
         this.mask = this.scene.make.image({
             x: this.scene.game.config.width / 2,
-            y: 100,
+            y: PROGRESS_Y,
             key: 'pg_mask',
             add: false
         });
         var newX = this.scene.game.config.width / 2;
         this.pgProgress = this.scene.make.image({
             x: newX,
-            y: 100,
+            y: PROGRESS_Y,
             key: 'pg_progress',
             add: true
         });
         this.pgProgress.mask = new Phaser.Display.Masks.BitmapMask(this.scene, this.mask);       
 
         this.timer = this.scene.make.image({
-            x: (this.scene.game.config.width / 2) - 261 -35,
-            y: 100,
+            x: (this.scene.game.config.width / 2) - (this.pgBackground.width/2),
+            y: PROGRESS_Y,
             key: 'timer',
             add: true
         });

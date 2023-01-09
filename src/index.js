@@ -5,10 +5,19 @@ import {LoadingScene} from './LoadingScene.js'
 
 const config = {
     type: Phaser.AUTO,
+    scale:{
+        mode: Phaser.Scale.NONE,
+        parent: 'content',        
+    },
     parent: 'content',
-    width: 1025,
-    height: 1530,
+    width: 800,
+    height: 600,
     scene: [LoadingScene, MainScene]
 };
+
+
+config.width = window.innerWidth;
+config.height = window.innerHeight;
+
 
 const game = new Phaser.Game(config);

@@ -16,6 +16,11 @@ import {ScorePoint} from './scorepoint.js'
 import {Beer} from './beer.js'
 import {Drinker} from './drinker.js'
 
+const LOGO_H = 580/3; 
+const BACKGROND_H = 520/3;
+const HOWTO_H = 1220/3;
+const TIMEDELAY = 200;
+
 export class MainScene extends Phaser.Scene
 {    
     constructor ()
@@ -29,7 +34,7 @@ export class MainScene extends Phaser.Scene
         this.scorePoint = new ScorePoint(this);
 
         this.beer = new Beer(this);
-        this.timeDelayPourCompleted = 200;
+        this.timeDelayPourCompleted = TIMEDELAY;
         this.objGames = [
             this.bar, 
             this.drinker,
@@ -59,7 +64,7 @@ export class MainScene extends Phaser.Scene
         });        
         this.sndBg.play();        
         
-        this.background = this.add.sprite(this.game.config.width / 2, 520, 'background');
+        this.background = this.add.sprite(this.game.config.width / 2, BACKGROND_H, 'background');
         this.showlogoAndHowToPlay();  
         
     }
@@ -77,7 +82,7 @@ export class MainScene extends Phaser.Scene
 
     showlogoAndHowToPlay(){
         let hide = false;
-        let logo = this.add.sprite(this.game.config.width / 2, 580, 'logo');
+        let logo = this.add.sprite(this.game.config.width / 2, LOGO_H, 'logo');
         logo.setInteractive()
         .on('pointerdown', ()=>{
             if (hide) return;
@@ -97,7 +102,7 @@ export class MainScene extends Phaser.Scene
             yoyo: true
         });        
 
-        let howto = this.add.sprite(this.game.config.width / 2, 1220, 'howto');
+        let howto = this.add.sprite(this.game.config.width / 2, HOWTO_H, 'howto');
         howto.setInteractive()
         .on('pointerdown', ()=>{
             if (hide) return;
