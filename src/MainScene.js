@@ -26,6 +26,7 @@ const BTN_FINALSCORE_Y = 260;// 780;
 const TXT_FINALSCORE_Y = 265; //790 /3 
 const FONT_TXT_FINAL_SIZE = 20;
 const PARTICLE_Y = 240; //780;
+const SND_BACKGROUND_VOLUME = 1; // 0.2
 
 export class MainScene extends Phaser.Scene
 {    
@@ -61,7 +62,7 @@ export class MainScene extends Phaser.Scene
     create (){       
         this.sndBg = this.sound.add('sndBg', {
             mute: false,
-            volume: 0.2,
+            volume: SND_BACKGROUND_VOLUME,
             rate: 1,
             detune: 0,
             seek: 0,
@@ -242,7 +243,6 @@ export class MainScene extends Phaser.Scene
 
         let drinkerType = Math.floor(Math.random() * maxType);
         let totalDrink = Math.floor(Math.random() * maxDrink);
-        // console.log(drinkerType, totalDrink);
         this.drinker.setDrinkerComeIn(drinkerType, totalDrink);   
         this.beer.availablePour = true;
         this.beer.beer.play('beerplay').stop();

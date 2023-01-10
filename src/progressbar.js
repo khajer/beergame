@@ -11,8 +11,7 @@ const REDUCE_SPEED = 0.4;
 export class ProgressBar {
     constructor (scene, reduceSpeed = REDUCE_SPEED){
         this.reduceSpeed = reduceSpeed;
-        this.scene = scene;
-        
+        this.scene = scene;        
     }
 
     reset(){
@@ -24,7 +23,7 @@ export class ProgressBar {
             x: this.scene.game.config.width / 2,
             y: PROGRESS_Y,
             key: 'pg_background',
-            add: true
+            // add: true
         });
         this.mask = this.scene.make.image({
             x: this.scene.game.config.width / 2,
@@ -50,10 +49,11 @@ export class ProgressBar {
 
     }
     update(){
-        if( this.gameover === true  || this.pgProgress === undefined){
+        if ( this.gameover === true  || this.pgProgress === undefined){
             return;
         }
-        if(this.pgProgress.x + (this.pgBackground.width/2) > this.pgBackground.width/2){
+        let difSpace = (this.pgProgress.x + this.pgBackground.width)  - this.pgBackground.x;        
+        if (difSpace > 0){
             this.pgProgress.x -= this.reduceSpeed;
         }else{            
             this.gameover = true;
