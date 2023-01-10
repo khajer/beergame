@@ -63,7 +63,7 @@ export class ProgressBar {
     preload(){        
     }
     static loading(scene){
-        console.log("loading progressbar");
+        // console.log("loading progressbar");
         scene.load.image('pg_background', pg_background);
         scene.load.image('pg_mask', pg_mask);
         scene.load.image('pg_progress', pg_progress);

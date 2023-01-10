@@ -161,12 +161,12 @@ export class Beer {
         let t = this;
 
         this.beer.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
-            console.log("ANIMATION_COMPLETE");
+            // console.log("ANIMATION_COMPLETE");
             if (isPressed === true){
                 beer.anims.timeScale = 1;
                 beer.play("beerOver");
                 isPressed = false;
-                console.log("beer over");
+                // console.log("beer over");
                 t.isBeerOver = true;
 
                 

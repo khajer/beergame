@@ -43,7 +43,7 @@ export class Drinker{
         let dk = this;
 
         this.drinker.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {            
-            console.log("animation completed ", dk.drinker.anims.currentAnim.key);
+            // console.log("animation completed ", dk.drinker.anims.currentAnim.key);
             if (dk.drinker.anims.currentAnim.key === dk.playState("in")){
                 dk.drinker.play(dk.playState("waiting")); 
                 if (dk.mapEvent.get(CHARACTER_WAITING) !== undefined) {

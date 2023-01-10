@@ -1,9 +1,6 @@
 import atariPng from "./assets/fonts/atari-smooth-1.png";
 import atariXml from './assets/fonts/atari-smooth.xml';
 
-// import Phaser from 'phaser';
-
-
 const FONT_Y = 65;
 const FONT_SIZE = 16;
 export class ScorePoint {

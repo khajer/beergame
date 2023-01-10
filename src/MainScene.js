@@ -185,7 +185,7 @@ export class MainScene extends Phaser.Scene
         });             
 
         this.bar.addGameoverFunc(()=>{
-            console.log("game over");            
+            // console.log("game over");            
             this.gameover = true;
             this.showGameover();
 
@@ -242,7 +242,7 @@ export class MainScene extends Phaser.Scene
 
         let drinkerType = Math.floor(Math.random() * maxType);
         let totalDrink = Math.floor(Math.random() * maxDrink);
-        console.log(drinkerType, totalDrink);
+        // console.log(drinkerType, totalDrink);
         this.drinker.setDrinkerComeIn(drinkerType, totalDrink);   
         this.beer.availablePour = true;
         this.beer.beer.play('beerplay').stop();
