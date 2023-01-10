@@ -6,7 +6,7 @@ import pg_progress from './assets/images/progressbar/progress.png';
 import timer from './assets/images/objects/timer.png';
 
 const PROGRESS_Y = 40;
-const REDUCE_SPEED = 0.4;
+const REDUCE_SPEED = 0.1;
 
 export class ProgressBar {
     constructor (scene, reduceSpeed = REDUCE_SPEED){
@@ -23,7 +23,7 @@ export class ProgressBar {
             x: this.scene.game.config.width / 2,
             y: PROGRESS_Y,
             key: 'pg_background',
-            // add: true
+            add: true
         });
         this.mask = this.scene.make.image({
             x: this.scene.game.config.width / 2,
