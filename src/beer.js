@@ -109,7 +109,9 @@ export class Beer {
 
     create(){
         if (this.sndPour === undefined){
-            this.sndPour = this.scene.sound.add('pour');
+            this.sndPour = this.scene.sound.add('pour', {
+                volume: 5
+            });
         }
 
         this.createAnimationKey();

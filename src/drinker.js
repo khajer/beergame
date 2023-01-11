@@ -34,8 +34,8 @@ export class Drinker{
     }        
     
     create(){
-        this.sndRespOne100 = this.scene.sound.add('sndrespOne1-100');
-        this.sndRespOneOther = this.scene.sound.add('sndrespOne1-other');
+        this.sndRespOne100 = this.scene.sound.add('sndrespOne1-100', {volume: 2});
+        this.sndRespOneOther = this.scene.sound.add('sndrespOne1-other', {volume: 4});
 
         UserDrink.createAnimation(this.scene);                
         this.drinker = this.scene.add.sprite(this.scene.game.config.width / 2, DRINKER_POS_Y, this.playState('waiting'));
@@ -57,11 +57,11 @@ export class Drinker{
                     dk.drinker.play( dk.playState("resp100")); 
                     dk.progressbar.addProgress(10);
                 } else if (dk.percentDrink === 75) {
-                    dk.drinker.play( dk.playState("resp75"));
                     dk.sndRespOneOther.play();                     
+                    dk.drinker.play( dk.playState("resp75"));                    
                 } else if (dk.percentDrink === 50) {
-                    dk.drinker.play( dk.playState("resp50"));
                     dk.sndRespOneOther.play(); 
+                    dk.drinker.play( dk.playState("resp50"));                    
                 } else if (dk.percentDrink === 25) {
                     dk.drinker.play( dk.playState("resp25")); 
                 } else if (dk.percentDrink === -50) {
